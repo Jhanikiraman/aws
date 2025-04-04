@@ -1,91 +1,931 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap 4 Website Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-  <style>
-  .fakeimg {
-    height: 200px;
-    background: #aaa;
-  }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joy Biteins | Premium Protein Drinks</title>
+    <style>
+        /* === ROOT VARIABLES === */
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --accent: #FFE66D;
+            --dark: #292F36;
+            --light: #F7FFF7;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* === BASE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'Poppins';
+            src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* === ANIMATIONS === */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes liquidWave {
+            0% { transform: skewY(0deg); }
+            50% { transform: skewY(4deg); }
+            100% { transform: skewY(0deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* === HEADER === */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-size: 300% 300%;
+            animation: gradientBG 8s ease infinite;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"><circle cx="250" cy="250" r="200" fill="none" stroke="white" stroke-width="0.5" stroke-dasharray="5,5"/></svg>');
+            opacity: 0.1;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        /* === NAVIGATION === */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 1.5rem;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            margin: 0 2rem;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5rem 2rem;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 500 150" preserveAspectRatio="none"><path d="M0,0 C150,50 350,0 500,50 L500,150 L0,150 Z" fill="%23F7FFF7"></path></svg>');
+            background-size: cover;
+            z-index: 2;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+
+        .cta-button:hover::after {
+            left: 100%;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero-bottle {
+            width: 100%;
+            max-width: 400px;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2));
+            animation: float 4s ease-in-out infinite;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+
+        .hero-bottle:hover {
+            animation: none;
+            transform: rotateY(20deg) translateY(-10px);
+            filter: drop-shadow(0 25px 40px rgba(0,0,0,0.3));
+        }
+
+        /* === FLAVOR SELECTOR === */
+        .flavor-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .flavor-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flavor-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .flavor-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .flavor-btn:hover::after {
+            background: rgba(0,0,0,0);
+        }
+
+        .flavor-btn.chocolate {
+            background: linear-gradient(45deg, #6B3E26, #A05C3C);
+        }
+
+        .flavor-btn.berry {
+            background: linear-gradient(45deg, #9C27B0, #E91E63);
+        }
+
+        .flavor-btn.vanilla {
+            background: linear-gradient(45deg, #F5F5DC, #E6D690);
+        }
+
+        /* === PRODUCTS SECTION === */
+        .products {
+            padding: 6rem 2rem;
+            background-color: var(--light);
+            text-align: center;
+            position: relative;
+        }
+
+        .products::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 500 150" preserveAspectRatio="none"><path d="M0,0 C150,100 350,50 500,100 L500,0 L0,0 Z" fill="white"></path></svg>');
+            background-size: cover;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 5px;
+            bottom: -15px;
+            left: 25%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 5px;
+            animation: liquidWave 3s ease infinite;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .product-image {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(transparent, white);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 2rem;
+            position: relative;
+        }
+
+        .product-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-flavor {
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .product-desc {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .add-to-cart {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--dark);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* === NUTRITION SECTION === */
+        .nutrition {
+            padding: 6rem 2rem;
+            background-color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .nutrition::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 500 150" preserveAspectRatio="none"><path d="M0,0 C150,100 350,50 500,100 L500,0 L0,0 Z" fill="%23F7FFF7"></path></svg>');
+            background-size: cover;
+        }
+
+        .nutrition-facts {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nutrition-facts::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .nutrition-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+
+        .nutrition-bar {
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .nutrition-fill {
+            height: 100%;
+            border-radius: 15px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0;
+            animation: fillAnimation 1.5s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        @keyframes fillAnimation {
+            from { width: 0; }
+            to { width: 80%; }
+        }
+
+        .nutrition-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* === TESTIMONIALS === */
+        .testimonials {
+            padding: 6rem 2rem;
+            background-color: var(--light);
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(78, 205, 196, 0.1);
+            font-family: serif;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* === NEWSLETTER === */
+        .newsletter {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--dark), #3a4750);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 500 150" preserveAspectRatio="none"><path d="M0,0 C150,100 350,50 500,100 L500,0 L0,0 Z" fill="%23F7FFF7"></path></svg>');
+            background-size: cover;
+            transform: rotate(180deg);
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            outline: none;
+            padding-left: 2rem;
+        }
+
+        .newsletter-form button {
+            padding: 1.2rem 2.5rem;
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 0 50px 50px 0;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #ffdb4d;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        .social-icons {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            opacity: 0.6;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 3rem 1rem;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+
+            .hero-image {
+                margin-top: 2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            nav a {
+                margin: 0 1rem;
+                font-size: 0.8rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input,
+            .newsletter-form button {
+                border-radius: 50px;
+                width: 100%;
+            }
+
+            .newsletter-form button {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <header>
+        <div class="logo">JOY BITEINS</div>
+        <div class="tagline">Protein Drinks That Spark Joy</div>
+    </header>
 
-<div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>My First Bootstrap 4 Page</h1>
-  <p>Resize this responsive page to see the effect!</p> 
-</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Flavors</a>
+        <a href="#">Nutrition</a>
+        <a href="#">Our Story</a>
+        <a href="#">Shop</a>
+        <a href="#">Contact</a>
+    </nav>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>    
-    </ul>
-  </div>  
-</nav>
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Fuel Your Joy With Every Sip</h1>
+            <p>Discover our delicious, nutrient-packed protein drinks designed to delight your taste buds while fueling your active lifestyle. No compromises on taste or quality.</p>
+            <a href="#" class="cta-button">Shop Now</a>
+            
+            <div class="flavor-selector">
+                <div class="flavor-btn chocolate" title="Chocolate Bliss"></div>
+                <div class="flavor-btn berry" title="Berry Burst"></div>
+                <div class="flavor-btn vanilla" title="Vanilla Dream"></div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Joy Biteins Protein Drink" class="hero-bottle">
+        </div>
+    </section>
 
-<div class="container" style="margin-top:30px">
-  <div class="row">
-    <div class="col-sm-4">
-      <h2>About Me</h2>
-      <h5>Photo of me:</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-      <h3>Some Links</h3>
-      <p>Lorem ipsum dolor sit ame.</p>
-      <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
-        </li>
-      </ul>
-      <hr class="d-sm-none">
-    </div>
-    <div class="col-sm-8">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2017</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-      <br>
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-    </div>
-  </div>
-</div>
+    <section class="products">
+        <h2 class="section-title">Our Signature Blends</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Chocolate Bliss">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Chocolate Bliss</h3>
+                    <div class="product-flavor">Rich Chocolate</div>
+                    <p class="product-desc">Creamy chocolate protein with organic cacao and a hint of sea salt for the perfect balance of sweet and rich.</p>
+                    <div class="product-price">$4.99</div>
+                    <a href="#" class="add-to-cart">Add to Cart</a>
+                </div>
+            </div>
 
-<div class="jumbotron text-center" style="margin-bottom:0">
-  <p>Footer</p>
-</div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Berry Burst">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Berry Burst</h3>
+                    <div class="product-flavor">Mixed Berries</div>
+                    <p class="product-desc">Antioxidant-rich berry blend with plant-based protein for a refreshing and nutritious boost.</p>
+                    <div class="product-price">$4.99</div>
+                    <a href="#" class="add-to-cart">Add to Cart</a>
+                </div>
+            </div>
 
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Vanilla Dream">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Vanilla Dream</h3>
+                    <div class="product-flavor">Smooth Vanilla</div>
+                    <p class="product-desc">Pure Madagascar vanilla with grass-fed whey protein for a classic, versatile flavor.</p>
+                    <div class="product-price">$4.99</div>
+                    <a href="#" class="add-to-cart">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="nutrition">
+        <div class="nutrition-facts">
+            <h3 class="nutrition-title">Nutrition Facts</h3>
+            
+            <div class="nutrition-item">
+                <div class="nutrition-label">
+                    <span>Protein</span>
+                    <span>24g</span>
+                </div>
+                <div class="nutrition-bar">
+                    <div class="nutrition-fill" style="width: 80%;"></div>
+                </div>
+            </div>
+            
+            <div class="nutrition-item">
+                <div class="nutrition-label">
+                    <span>Carbs</span>
+                    <span>8g</span>
+                </div>
+                <div class="nutrition-bar">
+                    <div class="nutrition-fill" style="width: 30%;"></div>
+                </div>
+            </div>
+            
+            <div class="nutrition-item">
+                <div class="nutrition-label">
+                    <span>Sugar</span>
+                    <span>3g</span>
+                </div>
+                <div class="nutrition-bar">
+                    <div class="nutrition-fill" style="width: 15%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">What Our Community Says</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">Joy Biteins has completely changed my post-workout routine. The Chocolate Bliss tastes like dessert but fuels me like a proper recovery drink!</p>
+                <div class="testimonial-author">- Sarah J., Fitness Coach</div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">As someone who struggles to find tasty protein options, Berry Burst is a game-changer. I look forward to drinking it every morning!</p>
+                <div class="testimonial-author">- Michael T., Marathon Runner</div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">The Vanilla Dream is so versatile - I use it in my coffee, smoothies, or just with water. Perfect balance of flavor and nutrition.</p>
+                <div class="testimonial-author">- Priya K., Nutritionist</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <h2>Join the Joyful Journey</h2>
+        <p>Subscribe for exclusive offers, new flavor launches, and wellness tips straight to your inbox.</p>
+        <form class="newsletter-form">
+            <input type="email" placeholder="Your email address">
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-logo">JOY BITEINS</div>
+        <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Our Story</a>
+            <a href="#">Ingredients</a>
+            <a href="#">Sustainability</a>
+            <a href="#">FAQ</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-pinterest-p"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Joy Biteins. All rights reserved.
+        </div>
+    </footer>
 </body>
 </html>
