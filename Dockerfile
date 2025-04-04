@@ -8,7 +8,7 @@ RUN apt update && apt install -y nginx && apt clean
 WORKDIR /var/www/html
 
 # Copy website files to Nginx's root directory
-COPY fruit-shop.html .
+COPY index.html .
 
 # Copy the custom Nginx configuration
 COPY nginx.conf /etc/nginx/sites-available/default
