@@ -1,14 +1,20 @@
 # Use Ubuntu as the base image
-FROM linux:latest
+FROM ubuntu:latest
 
-# Update package list and install Apache
-RUN yum update && yum install -y httpd
+# Install Nginx
+RUN apt update && apt install -y nginx && apt clean
 
-# Copy the HTML file to the Apache web root
-COPY index.html /var/www/html/index.html
+# Set the working directory
+WORKDIR /var/www/html
 
-# Expose port 80 for HTTP traffic
+# Copy website files to Nginx's root directory
+COPY fruit-shop.html .
+
+# Copy the custom Nginx configuration
+COPY nginx.conf /etc/nginx/sites-available/default
+
+# Expose port 80
 EXPOSE 80
 
-# Start Apache in the foreground
-CMD ["apachectl", "-D", "FOREGROUND"]
+# Start Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
